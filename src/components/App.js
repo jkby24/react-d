@@ -3,52 +3,56 @@
 
 import React from 'react';
 import ReactDom from 'react-dom';
+import FileReader from './FileReader.js';
+import ErrorGroupList from './ErrorGroupList.js';
+import GroupSelect from './GroupSelect.js';
 
-import { Router, Route, hashHistory } from 'react-router';
 
-
+// import { Router, Route, hashHistory } from 'react-router';
+// import {Navbar} from "react-bootstrap";
 var App = React.createClass({
+    getInitialState: function(){
+        return {
+                datas:[],//excel读取出来的原始数据
+                items: []//分组后的数据
+        }
+    },
+    datasChange: function(datas) {
+        this.setState({datas: datas});
+    },
+    afterGroup: function(items) {
+        this.setState({items: items});
+    },
     render: function() {
-        return (
-            <div>
-                <h5 className="title">hello, yeoman app!</h5>
-                <div>React Router: </div>
-                <div><a href="#/list">list page</a></div>
-                <div><a href="#/detail">detail page</a></div>
-            </div>
-        );
-    }
-});
-
-var List = React.createClass({
-    render: function() {
-        return (
-            <div>
-                <h5 className="title">hello, yeoman app!</h5>
-                <div><a href="#/">返回首页</a></div>
-                <div>这是列表页</div>
-            </div>
-        );
-    }
-});
-
-var Detail = React.createClass({
-    render: function() {
-        return (
-            <div>
-                <h5 className="title">hello, yeoman app!</h5>
-                <div><a href="#/">返回首页</a></div>
-                <div>这是详情页</div>
-            </div>
-        );
+        //todo 再优化
+        if(this.state.datas.length>0){
+            return (
+                <div className="panel-body">
+                    <FileReader datasChange={this.datasChange.bind(this)}></FileReader>
+                    <GroupSelect datas={this.state.datas} afterGroup={this.afterGroup.bind(this)}></GroupSelect>
+                    <ErrorGroupList items={this.state.items}></ErrorGroupList>
+                </div>
+            );
+        }else{
+            return (
+                <div className="panel-body">
+                    <FileReader datasChange={this.datasChange.bind(this)}></FileReader>
+                </div>
+            );
+        }
+        
     }
 });
 
 //最终渲染
 ReactDom.render((
-    <Router history={hashHistory}>
-        <Route path='/' component={App}></Route>
-        <Route path='/list' component={List} />
-        <Route path='/detail' component={Detail} />
-    </Router>
+    <App></App>
 ), document.getElementById('app'));
+
+// ReactDom.render((
+//     <Router history={hashHistory}>
+//         <Route path='/' component={App}></Route>
+//         <Route path='/list' component={List} />
+//         <Route path='/detail' component={Detail} />
+//     </Router>
+// ), document.getElementById('app'));
