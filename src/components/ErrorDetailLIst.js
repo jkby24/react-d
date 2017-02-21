@@ -1,5 +1,6 @@
 
 import React from 'react';
+import OuputWiki from './OuputWiki.js'
 /**
  * 错误详情列表
  */
@@ -27,31 +28,40 @@ export default class ErrorDetailList extends React.Component{
 //   }
 
   render() {
+
+    var items = this.props.items,
+    heads = Object.keys(items[0]);
+
     var style = {
-      display: this.props.isActive?'block':'none'
+      display: this.props.active?'block':'none'
     }
     return (
             <table className="table table-hover" style={style}>
                 <thead>
                     <tr>
-                        <th>page</th>
-                        <th>userAgent</th>
-                        <th>errorTime</th>
+                        {
+                          heads.map(function(key){
+                            return <th>{key}</th>
+                          })
+                        }
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
-
                   {
                     this.props.items.map(function(item) {
                         return <tr>
-                                  <td>{item.page}</td>
-                                  <td>{item.userAgent}</td>
-                                  <td>{item.errorTime}</td>
+                                  {
+                                    heads.map(function(key){
+                                      return <td>{(item[key] || '').toString().replace(/\n/g,'<br>')}</td>
+                                    })
+                                  }
+                                  <td>
+                                      <OuputWiki error={item}></OuputWiki>
+                                  </td>
                               </tr>
                     })
                   }
-
-
                 </tbody>
             </table>
         );

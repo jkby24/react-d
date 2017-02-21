@@ -38,7 +38,9 @@ export default class ErrorGroupList extends React.Component{
                                   {item.key}
                                   <span className="badge">{item.count}</span>
                               </div>
-                              <ErrorDetailList isActive={item.key==that.state.activeDetailKey} items = {item.errors}></ErrorDetailList>
+                              <div className=" table-responsive">
+                                <ErrorDetailList active={item.key==that.state.activeDetailKey} items = {item.errors}></ErrorDetailList>
+                              </div>
                           </div>
                 })
               }
