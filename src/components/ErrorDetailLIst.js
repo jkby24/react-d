@@ -3,7 +3,7 @@ import React from 'react';
 /**
  * 错误详情列表
  */
-export default class ErrorDetailLIst extends React.Component{
+export default class ErrorDetailList extends React.Component{
 
 //   constructor(props) {
 //     super(props);
@@ -27,8 +27,11 @@ export default class ErrorDetailLIst extends React.Component{
 //   }
 
   render() {
+    var style = {
+      display: this.props.isActive?'block':'none'
+    }
     return (
-            <table className="table table-hover">
+            <table className="table table-hover" style={style}>
                 <thead>
                     <tr>
                         <th>page</th>
@@ -44,11 +47,11 @@ export default class ErrorDetailLIst extends React.Component{
                                   <td>{item.page}</td>
                                   <td>{item.userAgent}</td>
                                   <td>{item.errorTime}</td>
-                              </tr> 
+                              </tr>
                     })
                   }
 
-                
+
                 </tbody>
             </table>
         );
