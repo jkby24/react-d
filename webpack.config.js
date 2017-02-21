@@ -1,15 +1,20 @@
 
 'use strict';
-
+var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");  //css单独打包
-
+var argv = require('minimist')(process.argv.slice(2));
+var isProduction = argv.env === 'production';
 module.exports = {
-    devtool: 'eval-source-map',
+    devtool: isProduction ? false : 'eval-source-map',//正式环境不需要source-map
 
-    entry: __dirname + '/src/entry.js', //唯一入口文件
+    entry: {
+      'vendor' : ['react', 'react-dom'],
+      'bundle' : __dirname + '/src/entry.js'
+    },
     output: {
         path: __dirname + '/build', //打包后的文件存放的地方
-        filename: 'bundle.js' //打包后输出文件的文件名
+        filename: '[name].js', //打包后输出文件的文件名
+        chunkFilename: "[name].js"
     },
 
     module: {
@@ -35,6 +40,9 @@ module.exports = {
 
     plugins: [
         new ExtractTextPlugin('main.css'),
+        new webpack.optimize.CommonsChunkPlugin({
+      		names: ['vendor']
+      	})
     ]
 
 }
