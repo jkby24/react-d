@@ -15,7 +15,7 @@ export default class GroupSelect extends React.Component{
     var datas = [],that = this;
     _.forEach(this.props.datas,function(data){
         var ex_msg = JSON.parse(data['ex_msg']);
-        ex_msg['client'] = that.getBowerInfo(ex_msg.userAgent);
+        ex_msg['client'] = that.getBowerInfo(ex_msg.userAgent,ex_msg.page);
         datas.push(ex_msg);
     })
     this.state = {
@@ -23,18 +23,19 @@ export default class GroupSelect extends React.Component{
       datas:datas
     };
   }
-  getBowerInfo(userAgent){
-    if(userAgent.indexOf('Android')>-1|| userAgent.indexOf("Linux") > -1){
+  getBowerInfo(userAgent,page){
+    if(page.indexOf('client=wechat')!=-1){//来源微信
+      return 'Wechat';
+    }else if(userAgent.indexOf('Android')>-1|| userAgent.indexOf("Linux") > -1){
       return 'Android';
-    }
-    if(userAgent.indexOf('iPhone')>-1){
+    }else if(userAgent.indexOf('iPhone')>-1){
       return 'iPhone';
-    }
-    if(userAgent.indexOf('iPad')>-1){
+    }else if(userAgent.indexOf('iPad')>-1){
       return 'iPad';
-    }
-    if(userAgent.indexOf('Windows')>-1){
+    }else if(userAgent.indexOf('Windows')>-1){
       return 'Windows';
+    }else{
+      return 'Unknown';
     }
   }
   componentDidMount() {
@@ -90,13 +91,13 @@ export default class GroupSelect extends React.Component{
   }
   render() {
     return (
-           <div className="btn-group" role="group" aria-label="...">
-              <button type="button" className={this.state.groupType == 'key' ? 'btn btn-primary' : 'btn btn-default'} onClick={this.groupByErrorKey}>根据错误消息</button>
-              <button type="button" className={this.state.groupType == 'url' ? 'btn btn-primary' : 'btn btn-default'} onClick={this.groupByPageUrl}>根据页面URL</button>
-              <button type="button" className={this.state.groupType == 'client' ? 'btn btn-primary' : 'btn btn-default'} onClick={this.groupByClient}>根据终端</button>
-              
-            </div>
-            
+          <div className="panel">
+            <ul className="nav nav-tabs">
+              <li role="presentation" className={this.state.groupType == 'key' ? 'active' : ''} onClick={this.groupByErrorKey}><a href="#">错误消息</a></li>
+              <li role="presentation" className={this.state.groupType == 'url' ? 'active' : ''} onClick={this.groupByPageUrl}><a href="#">页面URL</a></li>
+              <li role="presentation" className={this.state.groupType == 'client' ? 'active' : ''} onClick={this.groupByClient}><a href="#">终端</a></li>
+            </ul>
+          </div>
         );
   }
 };
