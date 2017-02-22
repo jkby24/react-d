@@ -2,6 +2,81 @@ html, body, div, h5, h6, p, ul, li {
     margin: 0px;
     padding: 0px;
 }
+.pointer-panel{
+  cursor: pointer;
+}
+.pointer-panel:hover{
+  background-color:#ecb3b3!important;
+}
+
+
+
+/*
+  loading的样式
+*/
+
+.loading-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+    z-index: 10000;
+}
+
+.loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 1050;
+    overflow: auto;
+    width: 180px;
+    margin: -120px 0px 0px -90px;
+    background-color: #fff;
+    border: 1px solid #999;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    *border: 1px solid #999;
+    border-radius: 6px;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    background-clip: padding-box;
+    text-align: center;
+    z-index: 10001;
+}
+
+.loading-body {
+    overflow-y: auto;
+    height: 100%;
+    max-height: 400px;
+    padding: 55px 12px 12px;
+    background: url(/images/loading_32x32.gif) no-repeat center 12px;
+}
+
+.loading-body p {
+    padding: 0;
+    margin: 0;
+}
+
+.loading.black {
+    background-color: rgba(0, 0, 0, 0.65);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6000000', endColorstr='#e6000000');
+}
+
+:root .loading.black {
+    -webkit-filter: "";
+    filter: "";
+}
+
+.loading.black .loading-body {
+    background: url(/images/loading_32x32_black.gif) no-repeat center 12px;
+}
+
+.loading.black p {
+    color: #fff;
+}
 /*
 #app {
     background: #09a;

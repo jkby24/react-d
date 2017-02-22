@@ -34,7 +34,7 @@ export default class ErrorGroupList extends React.Component{
               {
                 this.props.items.map(function(item) {
                     return <div className="panel panel-default panel-danger">
-                              <div className="panel-heading list-group-item" onClick={that.panelHeadClick.bind(that,item.key)}>
+                              <div className="panel-heading list-group-item pointer-panel" onClick={that.panelHeadClick.bind(that,item.key)}>
                                   {item.key}
                                   <span className="badge">{item.count}</span>
                               </div>

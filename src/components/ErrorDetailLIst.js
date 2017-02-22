@@ -53,7 +53,7 @@ export default class ErrorDetailList extends React.Component{
                         return <tr>
                                   {
                                     heads.map(function(key){
-                                      return <td>{(item[key] || '').toString().replace(/\n/g,'<br>')}</td>
+                                      return <td dangerouslySetInnerHTML={{__html: (item[key] || '').toString().replace(/\n/g,'<br>')}}></td>
                                     })
                                   }
                                   <td>
