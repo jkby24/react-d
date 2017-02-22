@@ -1,14 +1,16 @@
 
 'use strict';
+var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");  //css单独打包
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var argv = require('minimist')(process.argv.slice(2));
 var isProduction = argv.env === 'production';
 module.exports = {
     devtool: isProduction ? false : 'eval-source-map',//正式环境不需要source-map
 
     entry: {
-      'vendor' : ['react', 'react-dom'],
+      'vendor' : ['lodash','react', 'react-dom','react-bootstrap'],//引用的库打包到vendor
       'bundle' : __dirname + '/src/entry.js'
     },
     output: {
@@ -16,13 +18,15 @@ module.exports = {
         filename: '[name].js', //打包后输出文件的文件名
         chunkFilename: "[name].js"
     },
-
+    // externals: {
+    //   'react-bootstrap': 'react-bootstrap'
+    // },
     module: {
         loaders: [
             { test: /\.js$/, loader: "jsx!babel", include: /src/},
             { test: /\.css$/, loader: ExtractTextPlugin.extract("style", "css!postcss")},
             { test: /\.scss$/, loader: ExtractTextPlugin.extract("style", "css!postcss!sass")},
-            { test: /\.(png|jpg)$/, loader: 'url?limit=8192'}
+            { test: /\.(gif|jpg|png|woff|svg|eot|ttf)$/, loader: 'url?limit=1&name=images/[hash:8].[name].[ext]'}
         ]
     },
 
@@ -42,7 +46,11 @@ module.exports = {
         new ExtractTextPlugin('main.css'),
         new webpack.optimize.CommonsChunkPlugin({
       		names: ['vendor']
-      	})
+      	}),
+        new CopyWebpackPlugin([{
+          from: './src/images',
+          to: path.join(__dirname + '/build', 'images')
+        }])
     ]
 
 }
