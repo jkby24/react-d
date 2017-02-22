@@ -32,14 +32,17 @@ export default class ErrorGroupList extends React.Component{
     return (
             <div className="panel">
               {
-                this.props.items.map(function(item) {
-                    return <div className="panel panel-default panel-danger">
+                this.props.items.map(function(item,key) {
+                    var tableStyle = {
+                      display: item.key==that.state.activeDetailKey?'block':'none'
+                    }
+                    return <div className="panel panel-default panel-danger" key={key}>
                               <div className="panel-heading list-group-item pointer-panel" onClick={that.panelHeadClick.bind(that,item.key)}>
                                   {item.key}
                                   <span className="badge">{item.count}</span>
                               </div>
-                              <div className=" table-responsive">
-                                <ErrorDetailList active={item.key==that.state.activeDetailKey} items = {item.errors}></ErrorDetailList>
+                              <div className=" table-responsive" style={tableStyle}>
+                                <ErrorDetailList items = {item.errors}></ErrorDetailList>
                               </div>
                           </div>
                 })

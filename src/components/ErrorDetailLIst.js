@@ -1,19 +1,16 @@
 
 import React from 'react';
 import OuputWiki from './OuputWiki.js'
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 /**
  * 错误详情列表
  */
 export default class ErrorDetailList extends React.Component{
 
-//   constructor(props) {
-//     super(props);
-//     this.render = this.render.bind(this);
-//     this.state = {
-//       items: this.props.items,
-//       disabled: true
-//     };
-//   }
+  constructor(props) {
+    super(props);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+  }
 
 //   componentDidMount() {
 //     this.setState({
@@ -28,20 +25,20 @@ export default class ErrorDetailList extends React.Component{
 //   }
 
   render() {
-
+    console.log('1');
     var items = this.props.items,
     heads = Object.keys(items[0]);
-
-    var style = {
-      display: this.props.active?'block':'none'
-    }
+    //
+    // var style = {
+    //   display: this.props.active?'block':'none'
+    // }
     return (
-            <table className="table table-hover" style={style}>
+            <table className="table table-hover">
                 <thead>
                     <tr>
                         {
                           heads.map(function(key){
-                            return <th>{key}</th>
+                            return <th key={key}>{key}</th>
                           })
                         }
                         <th>操作</th>
@@ -49,11 +46,11 @@ export default class ErrorDetailList extends React.Component{
                 </thead>
                 <tbody>
                   {
-                    this.props.items.map(function(item) {
-                        return <tr>
+                    this.props.items.map(function(item,index) {
+                        return <tr key={index}>
                                   {
                                     heads.map(function(key){
-                                      return <td dangerouslySetInnerHTML={{__html: (item[key] || '').toString().replace(/\n/g,'<br>')}}></td>
+                                      return <td key={key} dangerouslySetInnerHTML={{__html: (item[key] || '').toString().replace(/\n/g,'<br>')}}></td>
                                     })
                                   }
                                   <td>
