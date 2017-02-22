@@ -1,8 +1,6 @@
 
 import React from 'react';
 import ErrorDetailList from './ErrorDetailList.js';
-import 'react-virtualized/styles.css';
-import { Column, Table } from 'react-virtualized';
 /**
  * 错误分组列表
  */
@@ -38,34 +36,19 @@ export default class ErrorGroupList extends React.Component{
                     var tableStyle = {
                       display: item.key==that.state.activeDetailKey?'block':'none'
                     }
-                    var errors = item.errors,
-                    heads = Object.keys(errors[0]);
-                    return <div className="panel panel-default panel-danger" key={key}>
+                    return <div className="panel panel-default panel-danger">
                               <div className="panel-heading list-group-item pointer-panel" onClick={that.panelHeadClick.bind(that,item.key)}>
                                   {item.key}
                                   <span className="badge">{item.count}</span>
                               </div>
                               <div className=" table-responsive" style={tableStyle}>
-                                <Table
-                                  width={1800}
-                                  height={800}
-                                  headerHeight={20}
-                                  rowHeight={30}
-                                  rowCount={item.errors.length}
-                                  rowGetter={({ index }) => item.errors[index]}
-                                  >
-                                    {
-
-                                      heads.map(function(field){
-                                        return <Column label={field} dataKey={field} width={200}/>
-                                      })
-                                    }
-                                </Table>
+                                <ErrorDetailList items = {item.errors}></ErrorDetailList>
                               </div>
                           </div>
                 })
               }
             </div>
+
         );
   }
 };
