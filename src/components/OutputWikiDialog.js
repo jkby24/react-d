@@ -9,9 +9,9 @@ import {Modal} from "react-bootstrap";
 export default class OutputWikiDialog extends React.Component{
   constructor(props) {
     super(props);
-    this.render = this.render.bind(this);
-    this.close = this.close.bind(this);
-    this.open = this.open.bind(this);
+    this._render =()=> this.render();
+    this._close =()=>  this.close();
+    this._open =()=>  this.open();
     this.state = {
       showModal: false
     };
@@ -29,12 +29,12 @@ export default class OutputWikiDialog extends React.Component{
         <Button
           bsStyle="primary"
           bsSize="small"
-          onClick={this.open}
+          onClick={this._open}
         >
           生成wiki
         </Button>
 
-        <Modal show={this.state.showModal} onHide={this.close}>
+        <Modal show={this.state.showModal} onHide={this._close}>
           <Modal.Header closeButton>
             <Modal.Title>wiki文本</Modal.Title>
           </Modal.Header>
@@ -42,7 +42,7 @@ export default class OutputWikiDialog extends React.Component{
             <textarea className="form-control" defaultValue={this.props.content} rows="35" cols="100"></textarea>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.close}>关闭</Button>
+            <Button onClick={this._close}>关闭</Button>
           </Modal.Footer>
         </Modal>
       </div>

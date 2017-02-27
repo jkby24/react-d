@@ -9,7 +9,6 @@ export default class ErrorGroupList extends React.Component{
   constructor(props) {
     super(props);
     this.render = this.render.bind(this);
-    // this.panelHeadClick = this.panelHeadClick.bind(this);
     this.state = {
       activeDetailKey: ''//展开的错误详情列表的key
     };

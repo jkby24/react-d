@@ -8,10 +8,10 @@ export default class GroupSelect extends React.Component{
 
   constructor(props) {
     super(props);
-    this.render = this.render.bind(this);
-    this.groupByErrorKey = this.groupByErrorKey.bind(this);
-    this.groupByPageUrl = this.groupByPageUrl.bind(this);
-    this.groupByClient = this.groupByClient.bind(this);
+    // this.render = this.render.bind(this);
+    this._groupByErrorKey = ()=>this.groupByErrorKey();
+    this._groupByPageUrl = ()=>this.groupByPageUrl();
+    this._groupByClient = ()=>this.groupByClient();
     var datas = [],that = this;
     _.forEach(this.props.datas,function(data){
         var ex_msg = JSON.parse(data['ex_msg']);
@@ -93,9 +93,9 @@ export default class GroupSelect extends React.Component{
     return (
           <div className="panel">
             <ul className="nav nav-tabs">
-              <li role="presentation" className={this.state.groupType == 'key' ? 'active' : ''} onClick={this.groupByErrorKey}><a href="#">错误消息</a></li>
-              <li role="presentation" className={this.state.groupType == 'url' ? 'active' : ''} onClick={this.groupByPageUrl}><a href="#">页面URL</a></li>
-              <li role="presentation" className={this.state.groupType == 'client' ? 'active' : ''} onClick={this.groupByClient}><a href="#">终端</a></li>
+              <li role="presentation" className={this.state.groupType == 'key' ? 'active' : ''} onClick={this._groupByErrorKey}><a href="#">错误消息</a></li>
+              <li role="presentation" className={this.state.groupType == 'url' ? 'active' : ''} onClick={this._groupByPageUrl}><a href="#">页面URL</a></li>
+              <li role="presentation" className={this.state.groupType == 'client' ? 'active' : ''} onClick={this._groupByClient}><a href="#">终端</a></li>
             </ul>
           </div>
         );

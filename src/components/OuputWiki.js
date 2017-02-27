@@ -8,7 +8,6 @@ export default class OuputWiki extends React.Component{
 
   constructor(props) {
     super(props);
-    this.render = this.render.bind(this);
   }
   getTemplate(error){
     return `

@@ -7,7 +7,6 @@ import React from 'react';
 export default class LoadingPopup extends React.Component{
   constructor(props) {
     super(props);
-    this.render = this.render.bind(this);
   }
   render() {
     var style = {
