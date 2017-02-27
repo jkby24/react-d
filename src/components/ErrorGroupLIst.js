@@ -36,7 +36,7 @@ export default class ErrorGroupList extends React.Component{
                     var tableStyle = {
                       display: item.key==that.state.activeDetailKey?'block':'none'
                     }
-                    return <div className="panel panel-default panel-danger">
+                    return <div className="panel panel-default panel-danger" key={key}>
                               <div className="panel-heading list-group-item pointer-panel" onClick={that.panelHeadClick.bind(that,item.key)}>
                                   {item.key}
                                   <span className="badge">{item.count}</span>

@@ -25,7 +25,6 @@ export default class ErrorDetailList extends React.Component{
 //   }
 
   render() {
-    console.log('1');
     var items = this.props.items,
     heads = Object.keys(items[0]);
     //
@@ -33,29 +32,30 @@ export default class ErrorDetailList extends React.Component{
     //   display: this.props.active?'block':'none'
     // }
     return (
-            <table className="table table-hover">
+            <table className="table table-hover table-striped table-bordered table-condensed">
                 <thead>
                     <tr>
+                      <th>操作</th>
                         {
                           heads.map(function(key){
                             return <th key={key}>{key}</th>
                           })
                         }
-                        <th>操作</th>
+
                     </tr>
                 </thead>
                 <tbody>
                   {
                     this.props.items.map(function(item,index) {
                         return <tr key={index}>
+                                  <td>
+                                      <OuputWiki error={item}></OuputWiki>
+                                  </td>
                                   {
                                     heads.map(function(key){
                                       return <td key={key} dangerouslySetInnerHTML={{__html: (item[key] || '').toString().replace(/\n/g,'<br>')}}></td>
                                     })
                                   }
-                                  <td>
-                                      <OuputWiki error={item}></OuputWiki>
-                                  </td>
                               </tr>
                     })
                   }
