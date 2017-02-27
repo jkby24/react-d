@@ -7,6 +7,7 @@ export default class FileReader extends React.Component{
     super(props);
     this._handleChange = (e) => this.handleChange(e);
     this._handleClick = () => this.handleClick();
+    this._openHelp = () => this.openHelp();
     this.state = {
         path:'',
         showLoading:false,
@@ -53,6 +54,10 @@ export default class FileReader extends React.Component{
 
          resolve(data);
       });
+  }
+
+  openHelp(event) {
+    window.open('http://wiki.sdp.nd/index.php?title=%E9%AB%98%E7%B2%BE%E5%B0%96-%E7%94%9F%E4%BA%A7%E4%B8%8Ajs%E9%94%99%E8%AF%AF%E7%9A%84%E5%A4%84%E7%90%86%E6%83%85%E5%86%B5%E8%AE%B0%E5%BD%95#.E5.89.8D.E8.A8.80')
   }
 
   handleChange(event) {
@@ -239,7 +244,12 @@ export default class FileReader extends React.Component{
   render() {
     return (
             <div className="panel panel-default panel-info">
-                <div className="panel-heading">文件读取</div>
+                <div className="panel-heading list-group-item">文件读取
+                  <span className="badge help-link" aria-hidden="true" onClick={this._openHelp}>
+                    <span className="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    使用说明
+                  </span>
+                </div>
                 <div className="panel-body">
                     <form id="formSearch" className="form-horizontal">
                           <div className="form-group" >
