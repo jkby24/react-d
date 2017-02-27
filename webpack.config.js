@@ -15,6 +15,7 @@ module.exports = {
     },
     output: {
         path: __dirname + '/build', //打包后的文件存放的地方
+        publicPath: '/bower_components/analyze/',//发布环境的上下文路径
         filename: '[name].js', //打包后输出文件的文件名
         chunkFilename: "[name].js"
     },
@@ -47,10 +48,10 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
       		names: ['vendor']
       	}),
-        new CopyWebpackPlugin([{
-          from: './src/images',
-          to: path.join(__dirname + '/build', 'images')
-        }])
+        // new CopyWebpackPlugin([{
+        //   from: './src/images',
+        //   to: path.join(__dirname + '/build', 'images')
+        // }])
     ]
 
 }

@@ -52,7 +52,7 @@ html, body, div, h5, h6, p, ul, li {
     height: 100%;
     max-height: 400px;
     padding: 55px 12px 12px;
-    background: url(/images/loading_32x32.gif) no-repeat center 12px;
+    background: url(../images/loading_32x32.gif) no-repeat center 12px;
 }
 
 .loading-body p {
@@ -71,7 +71,7 @@ html, body, div, h5, h6, p, ul, li {
 }
 
 .loading.black .loading-body {
-    background: url(/images/loading_32x32_black.gif) no-repeat center 12px;
+    background: url(../images/loading_32x32_black.gif) no-repeat center 12px;
 }
 
 .loading.black p {
