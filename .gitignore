@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/*
+.project
+node_modules/*
+build/*
+target/*
+npm-debug.log*
+*.orig
+.eslintrc
